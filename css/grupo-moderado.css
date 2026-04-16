@@ -120,14 +120,13 @@ body {
 }
 
 .logo-icon {
-    width: 44px;
-    height: 44px;
+    width: 200px;
+    height: 55px;
     background: var(--cor-fundo-card);
     border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
     overflow: hidden;
 }
 

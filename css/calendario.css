@@ -117,15 +117,14 @@ body {
 }
 
 .logo-icon {
-    width: 44px;
-    height: 44px;
-    background: #ffffff;
+    width: 200px;
+    height: 55px;
+    background: var(--cor-fundo-card);
     border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .logo-icon img {

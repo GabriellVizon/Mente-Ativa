@@ -10,15 +10,47 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/intro.css">
     <script src="js/acessibilidade.js" defer></script>
 </head>
 <body>
+    <!-- ============================================
+         INTRO CINEMATOGRÁFICA
+         (Este bloco deve ser o primeiro no body)
+         ============================================ -->
+    <div id="intro-overlay">
+        <div class="intro-background"></div>
+        <div class="intro-overlay-layer"></div>
+        
+        <div class="intro-content">
+            <div class="intro-logo">
+                <img src="img/unnamed.jpg" alt="Mente Ativa">
+            </div>
+            <p class="intro-text">
+                Jogos para treinar a memória e o raciocínio.<br>
+                Feito com cuidado para você.
+            </p>
+        </div>
+        
+        <div class="intro-skip-hint">
+            Clique em qualquer lugar da tela para continuar
+        </div>
+
+        <!-- Áudio (opcional - descomente se tiver arquivo) -->
+        <!-- <audio id="intro-audio" preload="auto"> -->
+        <!--     <source src="audio/intro.mp3" type="audio/mpeg"> -->
+        <!-- </audio> -->
+    </div>
+    
+    <!-- ============================================
+         FIM DA INTRO
+         ============================================ -->
+
     <div class="container">
         <div class="logo">
             <div class="logo-icon">
-                <img src="img/unnamed.jpg" alt="Logo Mente Ativa" />
+                <img src="img/Logo.png" alt="Logo Mente Ativa" />
             </div>
-            <span class="logo-text">Mente Ativa</span>
         </div>
 
         <header>
@@ -36,9 +68,7 @@
         <div class="groups-container">
             <a href="menu.html" class="group-btn moderado">
                 <div class="group-icon">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-                    </svg>
+                    <img src="img/bluebrain.jpeg" style="border-radius: 10px;" alt="Usar sozinho">
                 </div>
                 <div class="group-content">
                     <h2 class="group-title">Usar sozinho</h2>
@@ -49,11 +79,9 @@
                 </svg>
             </a>
 
-            <a href="jogos.html" class="group-btn simples">
+            <a href="grupo-simples.html" class="group-btn simples">
                 <div class="group-icon">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
-                    </svg>
+                    <img src="img/greenbrain.jpeg" style="border-radius: 10px;" alt="Usar com ajuda">
                 </div>
                 <div class="group-content">
                     <h2 class="group-title">Usar com ajuda</h2>
@@ -69,6 +97,8 @@
     <footer>
         <p>Feito com cuidado para você</p>
     </footer>
-    <script src="js/pages/index.js"></script>
+    
+    <!-- Script da Intro Cinematográfica -->
+    <script src="js/intro.js"></script>
 </body>
 </html>

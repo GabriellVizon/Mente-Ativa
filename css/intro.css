@@ -1,0 +1,205 @@
+/* ============================================
+   ESTILOS DA INTRO - Integrado ao site
+   ============================================ */
+:root {
+    --intro-color-1: #0B6477;
+    --intro-color-2: #0AD1C8;
+    --intro-color-3: #14919B;
+    --intro-color-4: #45DFB1;
+    --intro-duration: 5s;
+    --intro-ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+#intro-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 99999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.intro-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--intro-color-1), var(--intro-color-2), var(--intro-color-3), var(--intro-color-4), var(--intro-color-2), var(--intro-color-1));
+    background-size: 400% 400%;
+    animation: gradientFlow var(--intro-duration) ease infinite;
+}
+
+@keyframes gradientFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.intro-overlay-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+/* Container para as duas logos (centralizado) */
+.intro-logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Logo principal (esquerda) */
+.intro-logo {
+    opacity: 0;
+    transform: scale(0.85);
+    animation: logoAppear 1.5s var(--intro-ease) forwards;
+    animation-delay: 0.5s;
+}
+
+/* Animação para mover a logo para esquerda após aparecer */
+@keyframes moveLogoLeft {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-30px); }
+}
+
+.intro-logo {
+    animation: logoAppear 1.5s var(--intro-ease) forwards, moveLogoLeft 1s var(--intro-ease) forwards;
+    animation-delay: 0.5s, 2s;
+}
+
+.intro-logo img {
+    width: 120px;
+    height: 120px;
+    border-radius: 24px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Logo de texto (direita) */
+.intro-logo-text {
+    opacity: 0;
+    transform: translateX(30px);
+    animation: logoTextAppear 1s ease forwards;
+    animation-delay: 2.5s;
+}
+
+@keyframes logoTextAppear {
+    0% { 
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    100% { 
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.intro-logo-text img {
+    max-width: 250px;
+    height: auto;
+    filter: drop-shadow(0 4px 15px rgba(0, 0, 0, 0.3));
+}
+
+.intro-text {
+    margin-top: 40px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.2rem;
+    color: white;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: textAppear 1s var(--intro-ease) forwards;
+    animation-delay: 3s;
+    max-width: 500px;
+    line-height: 1.6;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes textAppear {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.intro-skip-hint {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.7);
+    letter-spacing: 0.5px;
+    text-align: center;
+    padding: 0;
+    background: transparent;
+    border: none;
+    cursor: default;
+    opacity: 0;
+    animation: textHintAppear 1.2s ease forwards;
+    animation-delay: 4.5s;
+    user-select: none;
+}
+
+@keyframes textHintAppear {
+    0% { opacity: 0; transform: translateX(-50%) translateY(10px); }
+    100% { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+@keyframes subtleFade {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+}
+
+.intro-skip-hint {
+    animation: textHintAppear 1.2s ease forwards, subtleFade 3s ease-in-out infinite;
+    animation-delay: 4.5s, 5.5s;
+}
+
+#intro-overlay.fade-out {
+    opacity: 0;
+    transition: opacity 0.8s ease-out;
+    pointer-events: none;
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+    .intro-logo-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .intro-logo img {
+        width: 90px;
+        height: 90px;
+    }
+    
+    .intro-logo-text img {
+        max-width: 180px;
+    }
+    
+    @keyframes moveLogoLeft {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(0); }
+    }
+    
+    .intro-text {
+        font-size: 1rem;
+    }
+    
+    .intro-skip-hint {
+        bottom: 30px;
+        font-size: 0.85rem;
+        padding: 0 20px;
+    }
+}

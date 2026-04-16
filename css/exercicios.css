@@ -1,4 +1,5 @@
 :root {
+    /* Light theme (default) */
     --cor-fundo: #F8FAFC;
     --cor-fundo-card: #FFFFFF;
     --cor-texto: #1E293B;
@@ -8,11 +9,20 @@
     --cor-terceira: #F59E0B;
     --cor-sucesso: #10B981;
     --cor-erro: #EF4444;
+    --cor-botao-ajuda: #14919B;
     --sombra: 0 4px 20px rgba(0, 0, 0, 0.08);
     --sombra-hover: 0 12px 40px rgba(0, 0, 0, 0.15);
     --borda-radius: 16px;
     --border: #E2E8F0;
     --primary-light: rgba(59, 130, 246, 0.1);
+    --secondary: #1e40af;
+    --primary: #2563eb;
+    --light: #60a5fa;
+    --accent: #3b82f6;
+    --background: #0f172a;
+    --surface: #1e293b;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
 }
 
 * {
@@ -116,15 +126,14 @@ body {
 }
 
 .logo-icon {
-    width: 44px;
-    height: 44px;
-    background: #ffffff;
+    width: 200px;
+    height: 55px;
+    background: var(--cor-fundo-card);
     border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .logo-icon img {
@@ -211,10 +220,10 @@ body {
     box-shadow: var(--sombra-hover);
 }
 
-.exercise-card.verde:hover { border-color: #45DFB1; }
-.exercise-card.laranja:hover { border-color: #0AD1C8; }
-.exercise-card.azul:hover { border-color: #14919B; }
-.exercise-card.roxo:hover { border-color: #0B6477; }
+.exercise-card.verde:hover { border-color: var(--secondary); }
+.exercise-card.laranja:hover { border-color: var(--secondary); }
+.exercise-card.azul:hover { border-color: var(--secondary); }
+.exercise-card.roxo:hover { border-color: var(--secondary); }
 
 .exercise-icon {
     width: 72px;
@@ -232,24 +241,24 @@ body {
 }
 
 .exercise-card.verde .exercise-icon {
-    background: linear-gradient(135deg, rgba(69, 223, 177, 0.2), rgba(69, 223, 177, 0.1));
+    background: var(--primary-light);
 }
-.exercise-card.verde .exercise-icon svg { fill: #45DFB1; }
+.exercise-card.verde .exercise-icon svg { fill: var(--primary); }
 
 .exercise-card.laranja .exercise-icon {
-    background: linear-gradient(135deg, rgba(10, 209, 200, 0.2), rgba(10, 209, 200, 0.1));
+    background: var(--primary-light);
 }
-.exercise-card.laranja .exercise-icon svg { fill: #0AD1C8; }
+.exercise-card.laranja .exercise-icon svg { fill: var(--primary); }
 
 .exercise-card.azul .exercise-icon {
-    background: linear-gradient(135deg, rgba(20, 145, 155, 0.2), rgba(20, 145, 155, 0.1));
+    background: var(--primary-light);
 }
-.exercise-card.azul .exercise-icon svg { fill: #14919B; }
+.exercise-card.azul .exercise-icon svg { fill: var(--primary); }
 
 .exercise-card.roxo .exercise-icon {
-    background: linear-gradient(135deg, rgba(11, 100, 119, 0.2), rgba(11, 100, 119, 0.1));
+    background: var(--primary-light);
 }
-.exercise-card.roxo .exercise-icon svg { fill: #0B6477; }
+.exercise-card.roxo .exercise-icon svg { fill: var(--primary); }
 
 .exercise-title {
     font-size: 22px;
@@ -296,24 +305,25 @@ body {
     transition: all 0.3s ease;
 }
 
-.exercise-card.verde .ver-btn { background: #45DFB1; color: #213A57; }
-.exercise-card.verde .ver-btn:hover { background: #34D399; }
+.exercise-card.verde .ver-btn { background: var(--light); color: white; }
+.exercise-card.verde .ver-btn:hover { background: #2385be; }
 
-.exercise-card.laranja .ver-btn { background: #0AD1C8; color: #213A57; }
-.exercise-card.laranja .ver-btn:hover { background: #06B6AC; }
+.exercise-card.laranja .ver-btn { background: var(--light); color: white; }
+.exercise-card.laranja .ver-btn:hover { background: #2385be; }
 
-.exercise-card.azul .ver-btn { background: #14919B; color: white; }
-.exercise-card.azul .ver-btn:hover { background: #0F766E; }
 
-.exercise-card.roxo .ver-btn { background: #0B6477; color: white; }
-.exercise-card.roxo .ver-btn:hover { background: #094756; }
 
 .tip-box {
     background: rgba(245, 158, 11, 0.1);
     border-left: 4px solid #F59E0B;
+    display: flex;
+    justify-content: center;
     border-radius: 12px;
     padding: 16px 20px;
     margin-top: 30px;
+    width: 60%;
+    align-self: center;
+
 }
 
 .tip-box p {

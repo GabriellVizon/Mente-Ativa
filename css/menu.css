@@ -15,7 +15,19 @@
     --borda-radius: 16px;
     --border: #E2E8F0;
     --primary-light: rgba(59, 130, 246, 0.1);
+    --secondary: #1e40af;
+    --primary: #2563eb;
+    --light: #60a5fa;
+    --accent: #3b82f6;
+    --background: #0f172a;
+    --surface: #1e293b;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
 }
+
+
+
+
 
 * {
     margin: 0;
@@ -40,7 +52,7 @@ body {
     border-radius: 50%;
     border: none;
     background: var(--cor-fundo-card);
-    color: var(--cor-primaria);
+    color: rgba(52, 119, 158, 0.644);
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -68,8 +80,8 @@ body {
 }
 
 .tts-btn.lendo {
-    background: var(--cor-secundaria);
-    color: #213A57;
+    background: rgba(20, 102, 196, 0.1);
+    color: #0f53a1;
     animation: pulsando 1.5s ease-in-out infinite;
 }
 
@@ -129,14 +141,13 @@ body {
 }
 
 .logo-icon {
-    width: 44px;
-    height: 44px;
+    width: 200px;
+    height: 55px;
     background: var(--cor-fundo-card);
     border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
     overflow: hidden;
 }
 
@@ -214,23 +225,23 @@ body {
 }
 
 .menu-btn.jogos:hover {
-    border-color: #45DFB1;
-    background: linear-gradient(to bottom, rgba(69, 223, 177, 0.03), var(--cor-fundo-card));
+    border-color: var(--secondary);
+    background: linear-gradient(to bottom, var(--primary-light), var(--cor-fundo-card));
 }
 
 .menu-btn.calendario:hover {
-    border-color: #14919B;
-    background: linear-gradient(to bottom, rgba(20, 145, 155, 0.03), var(--cor-fundo-card));
+    border-color: var(--secondary);
+    background: linear-gradient(to bottom, var(--primary-light), var(--cor-fundo-card));
 }
 
 .menu-btn.exercicios:hover {
-    border-color: #0AD1C8;
-    background: linear-gradient(to bottom, rgba(10, 209, 200, 0.03), var(--cor-fundo-card));
+    border-color: var(--secondary);
+    background: linear-gradient(to bottom, var(--primary-light), var(--cor-fundo-card));
 }
 
 .menu-btn.seguranca:hover {
-    border-color: #0B6477;
-    background: linear-gradient(to bottom, rgba(11, 100, 119, 0.03), var(--cor-fundo-card));
+    border-color: var(--secondary);
+    background: linear-gradient(to bottom, var(--primary-light), var(--cor-fundo-card));
 }
 
 .menu-btn.assistente {
@@ -238,21 +249,21 @@ body {
     flex-direction: row;
     gap: 16px;
     padding: 20px 32px;
-    background: linear-gradient(135deg, #F0FDF4, #ECFDF5);
+    background: var(--cor-fundo-card);
 }
 
 .menu-btn.assistente:hover {
-    border-color: #10B981;
-    background: linear-gradient(to bottom, rgba(16, 185, 129, 0.1), var(--cor-fundo-card));
+    border-color: var(--secondary);
+    background: linear-gradient(to bottom, var(--primary-light), var(--cor-fundo-card));
 }
 
 .menu-btn.assistente .icon {
-    background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.1));
+    background: linear-gradient(135deg, var(--primary-light), var(--cor-fundo-card));
     margin-bottom: 0;
 }
 
 .menu-btn.assistente .icon svg {
-    fill: #10B981;
+    fill: #2196f3;
 }
 
 .menu-btn.assistente .text {
@@ -286,24 +297,24 @@ body {
 }
 
 .menu-btn.jogos .icon {
-    background: linear-gradient(135deg, rgba(69, 223, 177, 0.15), rgba(69, 223, 177, 0.08));
+    background: linear-gradient(135deg, var(--primary-light), white);
 }
-.menu-btn.jogos .icon svg { fill: #45DFB1; }
+.menu-btn.jogos .icon svg { fill: #2196f3; }
 
 .menu-btn.calendario .icon {
-    background: linear-gradient(135deg, rgba(20, 145, 155, 0.15), rgba(20, 145, 155, 0.08));
+    background: linear-gradient(135deg, var(--primary-light), white);
 }
-.menu-btn.calendario .icon svg { fill: #14919B; }
+.menu-btn.calendario .icon svg { fill: #2196f3; }
 
 .menu-btn.exercicios .icon {
-    background: linear-gradient(135deg, rgba(10, 209, 200, 0.15), rgba(10, 209, 200, 0.08));
+    background: linear-gradient(135deg, var(--primary-light), white);
 }
-.menu-btn.exercicios .icon svg { fill: #0AD1C8; }
+.menu-btn.exercicios .icon svg { fill: #2196f3; }
 
 .menu-btn.seguranca .icon {
-    background: linear-gradient(135deg, rgba(11, 100, 119, 0.15), rgba(11, 100, 119, 0.08));
+    background: linear-gradient(135deg, var(--primary-light), white);
 }
-.menu-btn.seguranca .icon svg { fill: #0B6477; }
+.menu-btn.seguranca .icon svg { fill: #2196f3; }
 
 footer {
     text-align: center;

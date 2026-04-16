@@ -52,7 +52,7 @@ function renderizarCalendario() {
     const ano = dataAtual.getFullYear();
     const mes = dataAtual.getMonth();
     
-    document.querySelector('.page-title p').textContent = `${nomesMeses[mes]} ${ano}`;
+    
     document.querySelector('.calendar-header h2').textContent = `${nomesMeses[mes]} ${ano}`;
     
     const primeiroDia = new Date(ano, mes, 1).getDay();

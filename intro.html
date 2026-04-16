@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intro - Mente Ativa</title>
+    <style>
+        /* ============================================
+           CONFIGURAÇÕES (Edite aqui!)
+           ============================================ */
+        :root {
+            /* Cores do gradiente de fundo */
+            --intro-color-1: #0B6477;
+            --intro-color-2: #0AD1C8;
+            --intro-color-3: #14919B;
+            --intro-color-4: #45DFB1;
+            
+            /* Tempo de animação (em segundos) */
+            --intro-duration: 5s;
+            
+            /* Easing personalizado */
+            --intro-ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        /* ============================================
+           ESTILOS DA INTRO (Não editar abaixo)
+           ============================================ */
+        #intro-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 99999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        /* Fundo com gradiente animado */
+        .intro-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                135deg,
+                var(--intro-color-1),
+                var(--intro-color-2),
+                var(--intro-color-3),
+                var(--intro-color-4),
+                var(--intro-color-2),
+                var(--intro-color-1)
+            );
+            background-size: 400% 400%;
+            animation: gradientFlow var(--intro-duration) ease infinite;
+        }
+
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Overlay escuro para dar contraste */
+        .intro-overlay-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        /* Container central */
+        .intro-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 20px;
+            max-width: 90%;
+        }
+
+        /* Logo container */
+        .intro-logo {
+            opacity: 0;
+            transform: scale(0.85);
+            animation: logoAppear 1.5s var(--intro-ease) forwards;
+            animation-delay: 0.5s;
+        }
+
+        @keyframes logoAppear {
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .intro-logo img {
+            width: 120px;
+            height: 120px;
+            border-radius: 24px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Texto descritivo */
+        .intro-text {
+            margin-top: 30px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.2rem;
+            color: white;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: textAppear 1s var(--intro-ease) forwards;
+            animation-delay: 2s;
+            max-width: 500px;
+            line-height: 1.6;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes textAppear {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ============================================
+           MENSAGEM TEXTUAL - CINEMÁTICA
+           ============================================ */
+        .intro-skip-hint {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 0.5px;
+            text-align: center;
+            padding: 0;
+            background: transparent;
+            border: none;
+            border-radius: 0;
+            cursor: default;
+            opacity: 0;
+            animation: textHintAppear 1.2s ease forwards;
+            animation-delay: 3.5s;
+            user-select: none;
+            transition: none;
+        }
+
+        @keyframes textHintAppear {
+            0% { opacity: 0; transform: translateX(-50%) translateY(10px); }
+            100% { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+
+        /* Animação sutil de fade in/out em loop */
+        @keyframes subtleFade {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+
+        .intro-skip-hint {
+            animation: textHintAppear 1.2s ease forwards, subtleFade 3s ease-in-out infinite;
+            animation-delay: 3.5s, 4.5s;
+        }
+
+        /* Responsivo */
+        @media (max-width: 600px) {
+            .intro-skip-hint {
+                bottom: 30px;
+                font-size: 0.85rem;
+                padding: 0 20px;
+            }
+        }
+
+        /* ============================================
+           Classe para fechar a intro
+           ============================================ */
+        #intro-overlay.fade-out {
+            opacity: 0;
+            transition: opacity 0.8s ease-out;
+            pointer-events: none;
+        }
+
+        /* Responsivo para mobile */
+        @media (max-width: 600px) {
+            .intro-skip-hint {
+                font-size: 0.9rem;
+                padding: 12px 22px;
+                top: 20px;
+            }
+            
+            .intro-skip-hint::before {
+                content: '👆';
+            }
+            
+            .intro-skip-hint::after {
+                content: '';
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ============================================
+         INTRO SCREEN - Copiar antes da tag </body>
+         ============================================ -->
+    <div id="intro-overlay">
+        <div class="intro-background"></div>
+        <div class="intro-overlay-layer"></div>
+        
+        <div class="intro-content">
+            <div class="intro-logo">
+                <!-- === LOGO: Edite o caminho da imagem === -->
+                <img src="img/unnamed.jpg" alt="Mente Ativa">
+            </div>
+            
+            <!-- === TEXTO: Edite abaixo === -->
+            <p class="intro-text">
+                Jogos para treinar a memória e o raciocínio.<br>
+                Feito com cuidado para você.
+            </p>
+        </div>
+        
+        <!-- Mensagem textual elegante -->
+        <div class="intro-skip-hint">
+            Clique em qualquer lugar da tela para continuar
+        </div>
+
+        <!-- Áudio de fundo (adicione seu arquivo) -->
+        <!-- === ÁUDIO: Substitua pelo caminho do seu arquivo === -->
+        <!-- Exemplos: "audio/intro.mp3" ou "audio/ambient.mp3" -->
+        <audio id="intro-audio" preload="auto">
+            <source src="audio/intro.mp3" type="audio/mpeg">
+            <source src="audio/intro.ogg" type="audio/ogg">
+        </audio>
+    </div>
+
+    <script>
+        /* ============================================
+           JavaScript da Intro Com Áudio
+           ============================================ */
+        (function() {
+            const introOverlay = document.getElementById('intro-overlay');
+            const skipHint = document.querySelector('.intro-skip-hint');
+            const audio = document.getElementById('intro-audio');
+            
+            // Tempo total da animação
+            const totalAnimationTime = 5000;
+            
+            // Configuração do áudio
+            const audioConfig = {
+                volumeInicial: 0.15,
+                volumeFinal: 0.15,
+                fadeInDuration: 1500,
+                fadeOutDuration: 800
+            };
+            
+            // Variáveis de controle
+            let audioIniciado = false;
+            let audioReproduzindo = false;
+            
+            // Função para tocar áudio com fade-in
+            function playAudioWithFadeIn() {
+                if (!audio || audioIniciado) return;
+                
+                try {
+                    audio.volume = 0;
+                    audio.play().then(function() {
+                        audioIniciado = true;
+                        audioReproduzindo = true;
+                        
+                        // Fade-in suave
+                        let startTime = Date.now();
+                        function fadeIn() {
+                            let elapsed = Date.now() - startTime;
+                            let progress = Math.min(elapsed / audioConfig.fadeInDuration, 1);
+                            audio.volume = progress * audioConfig.volumeFinal;
+                            
+                            if (progress < 1) {
+                                requestAnimationFrame(fadeIn);
+                            }
+                        }
+                        fadeIn();
+                    }).catch(function(e) {
+                        console.log('Autoplay bloqueado, áudio será ativado no clique');
+                    });
+                } catch(e) {
+                    console.log('Erro ao reproduzir áudio:', e);
+                }
+            }
+            
+            // Função para parar áudio com fade-out
+            function stopAudioWithFadeOut() {
+                if (!audio || !audioReproduzindo) return;
+                
+                let startVolume = audio.volume;
+                let startTime = Date.now();
+                
+                function fadeOut() {
+                    let elapsed = Date.now() - startTime;
+                    let progress = Math.min(elapsed / audioConfig.fadeOutDuration, 1);
+                    audio.volume = startVolume * (1 - progress);
+                    
+                    if (progress < 1) {
+                        requestAnimationFrame(fadeOut);
+                    } else {
+                        audio.pause();
+                        audioReproduzindo = false;
+                    }
+                }
+                fadeOut();
+            }
+            
+            // Função para ativar áudio no primeiro clique
+            function ativarAudioNoClique() {
+                if (!audioIniciado && audio) {
+                    playAudioWithFadeIn();
+                }
+            }
+            
+            // Função para fechar a intro
+            function closeIntro() {
+                // Fade-out da intro
+                introOverlay.classList.add('fade-out');
+                
+                // Fade-out do áudio simultaneamente
+                stopAudioWithFadeOut();
+                
+                setTimeout(function() {
+                    introOverlay.style.display = 'none';
+                }, 800);
+            }
+            
+            // Iniciar áudio automaticamente ao carregar
+            window.addEventListener('load', function() {
+                setTimeout(playAudioWithFadeIn, 500);
+            });
+            
+            // Ativar áudio no primeiro clique (caso autoplay seja bloqueado)
+            introOverlay.addEventListener('click', ativarAudioNoClique, { once: true });
+            
+            // Clique no botão para pular
+            skipHint.addEventListener('click', function(e) {
+                e.stopPropagation();
+                closeIntro();
+            });
+            
+            // Clique em qualquer lugar da tela
+            introOverlay.addEventListener('click', function() {
+                closeIntro();
+            });
+            
+            // Fechar automaticamente após animação
+            setTimeout(function() {
+                closeIntro();
+            }, totalAnimationTime + 1500);
+        })();
+    </script>
+    <!-- ============================================
+         FIM DA INTRO
+         ============================================ -->
+</body>
+</html>

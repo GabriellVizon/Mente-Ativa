@@ -1,7 +1,9 @@
-require('dotenv').config();
-const express = require('express');
-const cors = require('cors');
-const OpenAI = require('openai');
+import express from 'express';
+import cors from 'cors';
+import { GoogleGenerativeAI } from '@google/generative-ai';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -9,11 +11,10 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-console.log('API Key carregada:', process.env.OPENAI_API_KEY ? 'Sim' : 'Não');
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
 
-const client = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY
-});
+console.log('API Key carregada:', process.env.GEMINI_API_KEY ? 'Sim' : 'Não');
 
 app.post('/api', async (req, res) => {
   try {
@@ -25,24 +26,11 @@ app.post('/api', async (req, res) => {
 
     console.log('Pergunta recebida:', pergunta);
 
-    const completion = await client.chat.completions.create({
-      model: 'gpt-4o-mini',
-      messages: [
-        {
-          role: 'system',
-          content: 'Você é um assistente virtual amigável chamado "Mente Ativa". Você ajuda idosos com perguntas sobre o site Mente Ativa, jogos cognitivos, exercícios físicos, segurança digital e bem-estar. Responda de forma muito simples, com frases curtas e claras. Use linguagem acessível para pessoas idosas. Sempre seja respeitoso e paciente.'
-        },
-        {
-          role: 'user',
-          content: pergunta
-        }
-      ],
-      max_tokens: 500,
-      temperature: 0.7
-    });
+    const prompt = `Você é um assistente virtual amigável chamado "Mente Ativa". Você ajuda idosos com perguntas sobre o site Mente Ativa, jogos cognitivos, exercícios físicos, segurança digital e bem-estar. Responda de forma muito simples, com frases curtas e claras. Use linguagem acessível para pessoas idosas. Sempre seja respeitoso e paciente. Pergunta: ${pergunta}`;
 
-    const resposta = completion.choices[0]?.message?.content || 'Desculpe, não consegui entender. Pode tentar novamente?';
-    
+    const result = await model.generateContent(prompt);
+    const resposta = result.response.text();
+
     console.log('Resposta:', resposta);
     res.json({ resposta });
   } catch (error) {

@@ -16,6 +16,17 @@
     --primary-light: rgba(59, 130, 246, 0.1);
 }
 
+.theme-green {
+  --primary: #16a34a;
+  --secondary: #166534;
+  --light: #4ade80;
+  --accent: #22c55e;
+  --background: #052e16;
+  --surface: #14532d;
+  --text: #dcfce7;
+  --muted: #86efac;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -104,6 +115,7 @@ body {
 .back-btn:hover {
     transform: translateX(-4px);
     box-shadow: var(--sombra-hover);
+    background: var(--cor-secundaria);
 }
 
 .back-btn svg {
@@ -119,14 +131,13 @@ body {
 }
 
 .logo-icon {
-    width: 44px;
-    height: 44px;
+    width: 200px;
+    height: 55px;
     background: var(--cor-fundo-card);
     border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
     overflow: hidden;
 }
 
