@@ -19,7 +19,7 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background-image: url(/img/background2.png);
+    background-image: url(../img/background2.png);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

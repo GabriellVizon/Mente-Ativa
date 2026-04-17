@@ -37,7 +37,7 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background-image: url(/img/background2.png), 
+    background-image: url(../img/bluebackground.png), 
         radial-gradient(circle at 10% 90%, rgba(20, 145, 155, 0.05) 0%, transparent 40%),
         radial-gradient(circle at 90% 10%, rgba(69, 223, 177, 0.05) 0%, transparent 40%);
     background-size: cover;
