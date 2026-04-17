@@ -33,7 +33,11 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background: var(--cor-fundo);
+    background-image: url(/img/background2.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     color: var(--cor-texto);
     min-height: 100vh;
     font-weight: 500;

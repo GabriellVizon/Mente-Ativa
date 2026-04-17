@@ -23,12 +23,13 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background: var(--cor-fundo);
+    background-image: url(/img/background2.png);
     color: var(--cor-texto);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     font-weight: 500;
+    
 }
 
 .container {
@@ -52,7 +53,6 @@ body {
 .logo-icon {
     width: 120px;
     height: 120px;
-    background: var(--cor-fundo);
     border-radius: 18px;
     align-items: center;
     justify-content: center;

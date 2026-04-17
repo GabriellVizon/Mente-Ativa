@@ -37,13 +37,16 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background: var(--cor-fundo);
+    background-image: url(/img/background2.png), 
+        radial-gradient(circle at 10% 90%, rgba(20, 145, 155, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 90% 10%, rgba(69, 223, 177, 0.05) 0%, transparent 40%);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     color: var(--cor-texto);
     min-height: 100vh;
     font-weight: 500;
-    background-image: 
-        radial-gradient(circle at 10% 90%, rgba(20, 145, 155, 0.05) 0%, transparent 40%),
-        radial-gradient(circle at 90% 10%, rgba(69, 223, 177, 0.05) 0%, transparent 40%);
 }
 
 .tts-btn {
@@ -121,11 +124,6 @@ body {
 .back-btn:hover {
     transform: translateX(-4px);
     box-shadow: var(--sombra-hover);
-}
-
-.back-btn:focus {
-    outline: 3px solid var(--cor-primaria);
-    outline-offset: 2px;
 }
 
 .back-btn svg {

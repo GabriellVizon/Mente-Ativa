@@ -35,13 +35,16 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background: var(--cor-fundo);
+    background-image: url(/img/background2.png), 
+        radial-gradient(circle at 10% 90%, rgba(16, 185, 129, 0.06) 0%, transparent 40%),
+        radial-gradient(circle at 90% 10%, rgba(59, 130, 246, 0.06) 0%, transparent 40%);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     color: var(--cor-texto);
     min-height: 100vh;
     font-weight: 500;
-    background-image: 
-        radial-gradient(circle at 10% 90%, rgba(16, 185, 129, 0.06) 0%, transparent 40%),
-        radial-gradient(circle at 90% 10%, rgba(59, 130, 246, 0.06) 0%, transparent 40%);
 }
 
 .tts-btn {

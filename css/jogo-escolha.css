@@ -24,7 +24,11 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background: var(--cor-fundo);
+            background-image: url(/img/background2.png);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
             color: var(--cor-texto);
             min-height: 100vh;
             font-weight: 500;
@@ -111,21 +115,29 @@
         }
 
         .logo-icon {
-            width: 44px;
-            height: 44px;
-            background: #ffffff;
+            width: 200px;
+            height: 55px;
+            background: var(--cor-fundo-card);
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
         .logo-icon img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+        }
+
+        .logo-text {
+            font-size: 22px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #0B6477, #0AD1C8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .logo-text {
