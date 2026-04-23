@@ -27,8 +27,7 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background-image: url(../img/bluebackground.png);
-    background-size: 96% auto;
+    background-image: url(../img/bluebkg.png);
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -106,13 +105,7 @@ body {
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
-    font-size: 20px;
-    font-weight: 700;
-    background: linear-gradient(135deg, #0B6477, #0AD1C8);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
+
 
 .page-title {
     text-align: center;

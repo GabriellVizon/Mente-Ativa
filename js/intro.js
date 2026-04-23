@@ -54,6 +54,7 @@
         document.body.style.overflow = '';
         setTimeout(function() {
             intro.style.display = 'none';
+            document.dispatchEvent(new CustomEvent('mente-ativa-intro-fechada'));
         }, 800);
     }
 

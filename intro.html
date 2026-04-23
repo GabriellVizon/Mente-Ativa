@@ -207,6 +207,8 @@
     pointer-events: none;
 }
 </style>
+<link rel="stylesheet" href="css/dark-mode.css">
+<script src="js/dark-mode.js" defer></script>
 </head>
 
 <body>
@@ -281,6 +283,7 @@ function type() {
         intro.classList.add('fade-out');
         setTimeout(() => {
             intro.style.display = 'none';
+            document.dispatchEvent(new CustomEvent('mente-ativa-intro-fechada'));
         }, 800);
     }
 
