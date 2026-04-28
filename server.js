@@ -9,6 +9,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
+app.use(express.static('.'));
 
 console.log('API Key carregada:', process.env.OPENROUTER_API_KEY ? 'Sim' : 'Não');
 
