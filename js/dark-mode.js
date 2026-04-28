@@ -1,6 +1,7 @@
 // Mente Ativa - Modo Escuro
 // Gerencia a troca entre backgrounds claro e escuro
 
+
 // Mapeamento de backgrounds: claro -> escuro
 const BACKGROUND_MAP = {
     'neutralbkg.png': 'darkneutralbkg.png',
@@ -169,6 +170,15 @@ class DarkModeManager {
 
     // Criar o botão de modo escuro
     criarBotao() {
+        // Não criar o botão durante a intro
+        const intro = document.getElementById('intro-overlay');
+        if (intro) {
+            const cs = window.getComputedStyle(intro);
+            if (cs.display !== 'none' && cs.visibility !== 'hidden') {
+                return;
+            }
+        }
+
         const { el, modo } = this.resolverAlvoBotao();
 
         this.botao = document.createElement('button');
@@ -179,22 +189,14 @@ class DarkModeManager {
         this.botao.setAttribute('data-escuro', this.isEscuro ? 'true' : 'false');
 
         this.botao.innerHTML = `
-    
-            <svg class="sun-icon" viewBox="0 0 24 24" fill="currentColor">
-                <circle cx="12" cy="12" r="5"/>
-                <line x1="12" y1="1" x2="12" y2="3"/>
-                <line x1="12" y1="21" x2="12" y2="23"/>
-                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-                <line x1="1" y1="12" x2="3" y2="12"/>
-                <line x1="21" y1="12" x2="23" y2="12"/>
-                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-            </svg>
-            <svg class="moon-icon" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-            </svg>
-        `;
+            
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="moon-icon" viewBox="0 0 16 16">
+      <path d="M12 8a4 4 0 1 1-8 0 4 4 0 0 1 8 0M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0m9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708"/>
+    </svg>
+                <svg class="sun-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+            `;
 
         this.botao.addEventListener('click', () => this.toggleModoEscuro());
 

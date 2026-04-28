@@ -2,6 +2,11 @@
 ESTILO GLOBAL
 ================================ */
 
+:root {
+  --tamanho110: 110%;
+  --tamanho100: 100%;  
+}
+
 body {
   font-family: 'Lexend', sans-serif;
   -webkit-font-smoothing: antialiased;

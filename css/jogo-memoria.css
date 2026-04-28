@@ -269,6 +269,22 @@
             justify-content: center;
             transition: all 0.3s ease;
             border: 3px solid transparent;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--cor-primaria), var(--cor-terceira));
+            transition: opacity 0.3s ease;
+        }
+
+        .card.flipped::before,
+        .card.matched::before {
+            opacity: 0;
         }
 
         .card:hover:not(.flipped):not(.matched) {
@@ -277,30 +293,35 @@
         }
 
         .card.flipped {
-            background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria));
+            background: var(--cor-fundo-card);
         }
 
         .card.matched {
-            background: var(--cor-secundaria);
+            background: var(--cor-fundo-card);
             cursor: default;
+            border-color: var(--cor-sucesso);
         }
 
-        .card-icon {
-            width: 50%;
-            height: 50%;
-            fill: var(--cor-primaria);
+        .card-image {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             opacity: 0;
             transition: opacity 0.3s ease;
         }
 
-        .card.flipped .card-icon,
-        .card.matched .card-icon {
-            opacity: 1;
-            fill: white;
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
-        .card.matched .card-icon {
-            fill: white;
+        .card.flipped .card-image,
+        .card.matched .card-image {
+            opacity: 1;
         }
 
         .feedback {
@@ -421,4 +442,92 @@
             .info-item {
                 padding: 10px 16px;
             }
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+        
+        .modal-content {
+            background-color: var(--cor-fundo-card);
+            margin: 15% auto;
+            padding: 20px;
+            border-radius: var(--borda-radius);
+            width: 80%;
+            max-width: 400px;
+            box-shadow: var(--sombra);
+            position: relative;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .modal-header h3 {
+            margin: 0;
+            color: var(--cor-texto);
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            color: var(--cor-texto-claro);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+        
+        .modal-close:hover {
+            background-color: var(--primary-light);
+            color: var(--cor-texto);
+        }
+        
+        .modal-body {
+            color: var(--cor-texto);
+            line-height: 1.6;
+        }
+        
+        .modal-body p {
+            margin: 10px 0;
+        }
+        
+        /* Button Styles */
+        .btn-secondary {
+            background: var(--primary-light);
+            color: var(--cor-texto);
+            border: 1px solid var(--border);
+            padding: 12px 24px;
+            border-radius: var(--borda-radius);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn-secondary:hover {
+            background: var(--cor-primaria);
+            color: white;
+            border-color: var(--cor-primaria);
         }

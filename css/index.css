@@ -233,17 +233,13 @@ h1 {
     height: 32px;
 }
 
-.moderado .group-icon {
-    background: linear-gradient(135deg, rgba(20, 145, 155, 0.15), rgba(20, 145, 155, 0.08));
-}
+
 
 .moderado .group-icon svg {
     fill: var(--cor-primaria);
 }
 
-.simples .group-icon {
-    background: linear-gradient(135deg, rgba(69, 223, 177, 0.15), rgba(69, 223, 177, 0.08));
-}
+
 
 .simples .group-icon svg {
     fill: var(--cor-secundaria);

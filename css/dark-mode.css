@@ -1,10 +1,14 @@
 /* Mente Ativa - Modo Escuro - Estilos do Botão */
 
+.dark-mode-btn-text {
+     gap: 8px;
+     font-size: 14px;
 
+}
 .dark-mode-btn {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
     border: none;
     background: var(--cor-fundo-card, #ffffff);
     color: var(--cor-primaria, #3b82f6);
@@ -35,16 +39,13 @@
 }
 
 .dark-mode-btn:hover {
-    background: var(--cor-primaria, #3b82f6);
-    color: white;
+    background: rgb(73, 73, 73);
+    color: #ffffff;
     transform: scale(1.08);
     box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
 }
 
-.dark-mode-btn:focus {
-    outline: 3px solid var(--cor-terceira, #f59e0b);
-    outline-offset: 2px;
-}
+
 
 .dark-mode-btn:active {
     transform: scale(0.95);
@@ -78,6 +79,23 @@
 .dark-mode-btn[data-escuro="true"] .moon-icon {
     opacity: 1;
     transform: rotate(0deg);
+}
+
+
+.menu-btn.jogos .icon {
+    background: linear-gradient(135deg, var(--primary-light), var(--cor-fundo-card));
+}
+
+.menu-btn.calendario .icon {
+    background: linear-gradient(135deg, var(--primary-light), var(--cor-fundo-card));
+}
+
+.menu-btn.seguranca .icon {
+    background: linear-gradient(135deg, var(--primary-light), var(--cor-fundo-card));
+}
+
+.menu-btn.exercicios .icon {
+    background: linear-gradient(135deg, var(--primary-light), var(--cor-fundo-card));
 }
 
 /* Responsivo para mobile */
@@ -139,14 +157,12 @@ html.modo-escuro .dark-mode-btn {
 }
 
 html.modo-escuro .dark-mode-btn:hover {
-    background: var(--cor-primaria);
+    background: var(--dm-link-hover);
     color: #0f172a;
     box-shadow: 0 0 0 2px var(--dm-link-hover), 0 4px 20px rgba(0, 0, 0, 0.45);
 }
 
-html.modo-escuro .dark-mode-btn:focus {
-    outline-color: var(--cor-terceira);
-}
+
 
 /* Cabeçalhos e áreas: contorno explícito (não depender só da cor de fundo) */
 html.modo-escuro .header {
@@ -237,9 +253,7 @@ html.modo-escuro .timer-display {
     color: var(--cor-texto);
 }
 
-html.modo-escuro .instruction-text {
-    color: var(--cor-terceira);
-}
+
 
 html.modo-escuro .feedback-subtitle,
 html.modo-escuro .instruction-hint,
