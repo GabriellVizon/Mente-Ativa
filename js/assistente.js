@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Enviar pergunta para a API
+    // Enviar pergunta para a API com retentativas
     async function sendQuestion() {
         const pergunta = userInput.value.trim();
         
@@ -115,37 +115,97 @@ document.addEventListener('DOMContentLoaded', function() {
         // Mostrar indicador de digitação
         showTyping();
 
-        try {
-            const response = await fetch('http://localhost:3000/api', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ pergunta })
-            });
+        const maxTentativas = 3;
+        let tentativa = 0;
+        let sucesso = false;
+        let ultimoErro = '';
 
-            if (!response.ok) {
-                throw new Error('Erro na comunicação');
+        while (tentativa < maxTentativas && !sucesso) {
+            try {
+                tentativa++;
+                console.log(`Tentativa ${tentativa}/${maxTentativas} para enviar pergunta`);
+
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 15000); // 15 segundos timeout
+
+                const response = await fetch('http://localhost:3000/api', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ pergunta }),
+                    signal: controller.signal
+                });
+
+                clearTimeout(timeoutId);
+
+                if (response.ok) {
+                    const data = await response.json();
+                    
+                    if (data.resposta) {
+                        // Remover indicador de digitação
+                        hideTyping();
+
+                        // Adicionar resposta do assistente
+                        addMessage(data.resposta, false);
+
+                        // Falar a resposta em voz alta
+                        falar(data.resposta);
+
+                        sucesso = true;
+                    }
+                } else {
+                    ultimoErro = `Erro ${response.status}: ${response.statusText}`;
+                    
+                    if (response.status === 429) {
+                        // Rate limited - aguardar antes de tentar novamente
+                        console.warn('Rate limited. Aguardando...');
+                        await new Promise(r => setTimeout(r, 2000 * tentativa));
+                    } else if (response.status >= 500) {
+                        // Erro do servidor - tentar novamente
+                        if (tentativa < maxTentativas) {
+                            await new Promise(r => setTimeout(r, 1000 * tentativa));
+                        }
+                    } else {
+                        // Erro do cliente - não tentar novamente
+                        throw new Error(ultimoErro);
+                    }
+                }
+
+            } catch (error) {
+                ultimoErro = error.message;
+                console.error(`Tentativa ${tentativa} falhou:`, error);
+                
+                // Se for timeout ou erro de conexão, tentar novamente
+                if ((error.name === 'AbortError' || ultimoErro.includes('Failed to fetch')) && tentativa < maxTentativas) {
+                    console.log('Reconectando...');
+                    await new Promise(r => setTimeout(r, 1000 * tentativa));
+                } else if (tentativa === maxTentativas) {
+                    // Última tentativa falhou
+                    break;
+                }
+            }
+        }
+
+        if (!sucesso) {
+            // Remover indicador de digitação
+            hideTyping();
+
+            // Mostrar mensagem de erro detalhada
+            let mensagemErro = 'Desculpe, não consegui responder agora.\n\n';
+            
+            if (ultimoErro.includes('Failed to fetch') || ultimoErro.includes('ERR_')) {
+                mensagemErro += '❌ Verifique se o servidor está ligado.\n\nDigite no terminal: npm start';
+            } else if (ultimoErro.includes('timeout')) {
+                mensagemErro += '⏱️ A resposta demorou muito. Tente novamente.';
+            } else if (ultimoErro.includes('429')) {
+                mensagemErro += '⚠️ Muitas requisições. Aguarde um pouco e tente novamente.';
+            } else {
+                mensagemErro += `Erro: ${ultimoErro}`;
             }
 
-            const data = await response.json();
-            
-            // Remover indicador de digitação
-            hideTyping();
-
-            // Adicionar resposta do assistente
-            addMessage(data.resposta, false);
-
-            // Falar a resposta em voz alta
-            falar(data.resposta);
-
-        } catch (error) {
-            // Remover indicador de digitação
-            hideTyping();
-
-            // Mostrar mensagem de erro
-            addMessage('Desculpe, não consegui responder agora. Verifique se o servidor está ligado e tente novamente.', false);
-            console.error('Erro:', error);
+            addMessage(mensagemErro, false);
+            console.error('Falha após retentativas:', ultimoErro);
         }
 
         // Reabilitar botão e input
