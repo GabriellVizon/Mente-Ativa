@@ -1,23 +1,3 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Jogo de completar frases para idosos - Mente Ativa">
-    <title>Mente Ativa - Completar Frases</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="shortcut icon" href="/TCC---Idosos/img/unnamed.jpg" type="image/x-icon">
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/jogo-frases.css">
-    <link rel="stylesheet" href="css/dark-mode.css">
-    <script src="js/acessibilidade.js" defer></script>
-    <script src="js/dark-mode.js" defer></script>
-</head>
-<body>
-    <!-- Assistente Mente Ativa -->
-<script>
 (function() {
   var WIDGET_URL = 'https://preview-sandbox--69f91e4a477333d3fbfe891c.base44.app/widget';
   var W = Math.min(360, window.innerWidth - 32);
@@ -46,28 +26,3 @@
   document.body.appendChild(iframe);
   document.body.appendChild(btn);
 })();
-</script>
-    <div class="header">
-        <a href="grupo-simples.html" class="back-btn">
-            <svg viewBox="0 0 24 24">
-                <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
-            </svg>
-        </a>
-        <div class="logo">
-            <div class="logo-icon">
-                <img src="img/LogoVerde.png" alt="Logo">
-            </div>
-        </div>
-    </div>
-
-    <div class="maintenance-container">
-        <div class="maintenance-icon">🔧</div>
-        <h1 class="maintenance-title">EM MANUTENÇÃO 😊</h1>
-        <p class="maintenance-subtitle">Este jogo estará disponível em breve</p>
-    </div>
-
-    <footer>
-        Feito com cuidado para você
-    </footer>
-</body>
-</html>
