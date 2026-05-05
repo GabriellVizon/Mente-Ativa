@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
+    const API_URL = window.MENTE_ATIVA_API_URL || 'https://mente-ativa-1.onrender.com/api';
     const chatMessages = document.getElementById('chatMessages');
     const userInput = document.getElementById('userInput');
     const sendBtn = document.getElementById('sendBtn');
@@ -45,6 +46,16 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Adicionar mensagem ao chat
+    function formatMessageContent(content) {
+        return String(content || '')
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#039;')
+            .replace(/\n/g, '<br>');
+    }
+
     function addMessage(content, isUser) {
         const messageDiv = document.createElement('div');
         messageDiv.className = `message ${isUser ? 'user' : 'assistant'}`;
@@ -54,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
         messageDiv.innerHTML = `
             <div class="message-avatar">${avatar}</div>
             <div class="message-content">
-                <p>${content}</p>
+                <p>${formatMessageContent(content)}</p>
             </div>
         `;
 
@@ -128,7 +139,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const controller = new AbortController();
                 const timeoutId = setTimeout(() => controller.abort(), 15000); // 15 segundos timeout
 
-                const response = await fetch('http://localhost:3000/api', {
+                const response = await fetch(API_URL, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -195,7 +206,7 @@ document.addEventListener('DOMContentLoaded', function() {
             let mensagemErro = 'Desculpe, não consegui responder agora.\n\n';
             
             if (ultimoErro.includes('Failed to fetch') || ultimoErro.includes('ERR_')) {
-                mensagemErro += '❌ Verifique se o servidor está ligado.\n\nDigite no terminal: npm start';
+                mensagemErro += 'Não consegui me conectar ao servidor da IA. Verifique se o serviço do Render está ativo e tente novamente.';
             } else if (ultimoErro.includes('timeout')) {
                 mensagemErro += '⏱️ A resposta demorou muito. Tente novamente.';
             } else if (ultimoErro.includes('429')) {

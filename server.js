@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 10000;
 
 app.use(cors());
 app.use(express.json());
@@ -20,30 +20,30 @@ async function obterRespostaIA(pergunta) {
   if (process.env.OPENROUTER_API_KEY) {
     try {
       console.log('Tentando OpenRouter...');
-      const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-        method: "POST",
-        headers: {
-          "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
-          "Content-Type": "application/json",
-          "HTTP-Referer": "http://localhost:3000"
-        },
-        body: JSON.stringify({
-          model: "gpt-3.5-turbo",
-          messages: [
-            {
-              role: "system",
-              content: "Você é um assistente chamado Mente Ativa. Responda de forma simples, clara e amigável para idosos. Respostas breves (2-3 parágrafos no máximo)."
-            },
-            {
-              role: "user",
-              content: pergunta
-            }
-          ],
-          temperature: 0.7,
-          max_tokens: 500
-        }),
-        timeout: 20000
-      });
+     const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+  method: "POST",
+  headers: {
+    "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
+    "Content-Type": "application/json",
+    "HTTP-Referer": "https://mente-ativa-1.onrender.com",
+    "X-Title": "Mente Ativa"
+  },
+  body: JSON.stringify({
+    model: "openai/gpt-3.5-turbo",
+    messages: [
+      {
+        role: "system",
+        content: "Você é um assistente chamado Mente Ativa. Responda de forma simples, clara e amigável para idosos."
+      },
+      {
+        role: "user",
+        content: pergunta
+      }
+    ],
+    temperature: 0.7,
+    max_tokens: 500
+  })
+});
 
       if (response.ok) {
         const data = await response.json();
@@ -58,34 +58,7 @@ async function obterRespostaIA(pergunta) {
     }
   }
 
-  // Fallback: Usar API do Groq (gratuita e sem chave de autenticação complicada)
-  try {
-    console.log('Tentando API de fallback (Groq/Cohere/Local)...');
-    
-    // Tenta Cohere Free API (sem autenticação, limitado mas funciona)
-    const response = await fetch("https://api.cohere.ai/v1/generate", {
-      method: "POST",
-      headers: {
-        "Authorization": "Bearer demo",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        prompt: `Você é um assistente virtual chamado Mente Ativa. Responda de forma simples, clara e amigável para idosos.\n\nPergunta: ${pergunta}\n\nResposta:`,
-        max_tokens: 300,
-        temperature: 0.8
-      }),
-      timeout: 15000
-    });
-
-    if (response.ok) {
-      const data = await response.json();
-      if (data.generations && data.generations[0]) {
-        return data.generations[0].text.trim();
-      }
-    }
-  } catch (error) {
-    console.warn('Cohere fallback erro:', error.message);
-  }
+  
 
   // Último fallback: Resposta genérica baseada em palavras-chave
   return gerarRespostaGenérica(pergunta);
@@ -234,7 +207,7 @@ Estou aqui para ajudá-lo com:
 Se tiver uma pergunta mais específica, tente reformular e tente novamente. Farei o meu melhor para ajudá-lo!`;
 }
 
-app.post('/api', async (req, res) => {
+async function handleChat(req, res) {
   try {
     const { pergunta } = req.body;
 
@@ -254,14 +227,17 @@ app.post('/api', async (req, res) => {
     console.error(`[${new Date().toLocaleTimeString('pt-BR')}] Erro no servidor:`, error.message);
     res.status(500).json({ resposta: 'Desculpe, houve um erro. Por favor, tente novamente.' });
   } 
-});
+}
+
+app.post('/api', handleChat);
+app.post('/api/chat', handleChat);
 
 app.get('/test', (req, res) => {
   res.json({ status: 'ok', message: 'Servidor funcionando!' });
 });
 
 app.listen(PORT, () => {
-  console.log(`✅ Servidor rodando em http://localhost:${PORT}`);
+  console.log(`✅ Servidor rodando em https://mente-ativa-1.onrender.com`);
   console.log(`📡 CORS habilitado`);
   console.log(`🤖 IA pronta para responder perguntas`);
 });
